@@ -1,8 +1,10 @@
 import React from 'react'
-
+import Header from '../components/Header'
 const page = () => {
   return (
-    <div>pages</div>
+    <div className="justify-center">
+        <Header/>
+    </div>
   )
 }
 

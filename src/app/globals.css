@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+.header{
+  @apply w-5/6 flex flex-row justify-between 
+}
+
+
+
+button{
+  @apply bg-purple-500 rounded-sm p-1 text-gray-100 shadow-sm shadow-slate-500 hover:shadow-md hover:bg-purple-600
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
