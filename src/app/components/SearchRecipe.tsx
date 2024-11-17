@@ -1,8 +1,9 @@
+"use client"
 import React from 'react'
 
 const SearchRecipe = () => {
   return (
-    <input />
+    <input className='input rectangle flex'/>
   )
 }
 

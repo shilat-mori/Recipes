@@ -10,12 +10,12 @@ const Header = () => {
     }
   return (
     <div className="header">
-      <div className="flex">
+      <div className="flex w-1/2 justify-start">
         <CategorySelect />
         <SearchRecipe />
       </div>
-      <div className="flex">
-        <button onClick={handleCLickAdd}>New Recipe</button>
+      <div className="flex w-1/2 justify-end">
+        <button className="rectangle" onClick={handleCLickAdd}>New Recipe</button>
       </div>
     </div>
   );

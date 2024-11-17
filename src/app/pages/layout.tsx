@@ -7,7 +7,7 @@ export default function PagesLayout({
     <div>
       <header>header</header>
       {children}
-      <footer>footer</footer>{" "}
+      <footer>footer</footer>
     </div>
   );
 }
