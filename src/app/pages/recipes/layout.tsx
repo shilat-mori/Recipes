@@ -1,3 +1,4 @@
+import Header from "../../components/Header";
 
 export default function PagesLayout({
   children,
@@ -6,9 +7,8 @@ export default function PagesLayout({
 }>) {
   return (
     <div>
-      <header>header</header>
+      <Header/>
       {children}
-      <footer>footer</footer>
     </div>
   );
 }

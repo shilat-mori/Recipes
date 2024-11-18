@@ -1,9 +1,9 @@
 import React from 'react'
-import Header from '../components/Header'
+import RecipeCard from '../components/RecipeCard'
 const page = () => {
   return (
     <div >
-        <Header/>
+       <RecipeCard/>
     </div>
   )
 }
