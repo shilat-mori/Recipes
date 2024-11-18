@@ -5,8 +5,8 @@ import NavItem from "./NavItem";
 const NavBar = () => {
   return (
     <ul className="flex">
-      <NavItem {...{text:"All Recipes", navigation:"/pages/AllRecipes"}} />
-      <NavItem {...{text:"Favorite Recipes", navigation:"/pages/FavoriteRecipes"}}/>
+      <NavItem {...{text:"All Recipes", navigation:"/pages/recipes/all_recipes"}} />
+      <NavItem {...{text:"Favorite Recipes", navigation:"/pages/recipes/favorite_recipes"}}/>
     </ul>
   );
 };
