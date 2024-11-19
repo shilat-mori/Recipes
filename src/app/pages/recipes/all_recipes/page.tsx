@@ -1,8 +1,10 @@
+import RecipeCard from '@/app/components/RecipeCard'
 import React from 'react'
+
 
 const page = () => {
   return (
-    <div>all_recipes</div>
+    <div className='grid grid-cols-5'><RecipeCard/></div>
   )
 }
 
