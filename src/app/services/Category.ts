@@ -45,7 +45,7 @@ const updateCategory = async (category: ICategory) => {
       },
     }
   );
-  return res.data.data;
+  return res.data.message;
 };
 const deleteCategory = async (id: number) => {
   const res = await axios.delete(`api/Category/${id}`, {
@@ -56,7 +56,7 @@ const deleteCategory = async (id: number) => {
   return res.data.data;
 };
 
-export default {
+export {
   getAllCategories,
   getCategory,
   createCategory,

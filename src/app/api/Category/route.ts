@@ -18,39 +18,43 @@ export async function POST(req: NextRequest) {
 
   try {
     await connect();
-    const category:ICategory = new Category({
-        id:data.new_category.id,
-        category_name: data.new_category.category_name
-    })
+    const category: ICategory = new Category({
+      id: data.new_category.id,
+      category_name: data.new_category.category_name,
+    });
     console.log(category);
 
-    const res = await category.save()
-    if(res) console.log("create successful");
+    const res = await category.save();
+    if (res) console.log("create successful");
     else console.log("already exists");
-    
-    
+
     return NextResponse.json({ message: "GET success" });
   } catch (err) {
     return NextResponse.json({ message: "GET error: " + err, data: null });
   }
 }
 
-export async function PUT(req:NextRequest) {
-    const data = await req.json() 
+export async function PUT(req: NextRequest) {
+  const data = await req.json();
   try {
     await connect();
-    const category:ICategory = new Category({
-        id:data.new_category.id,
-        category_name: data.new_category.category_name
-    })
+    const category: ICategory = new Category({
+      id: data.updated_category.id,
+      category_name: data.updated_category.category_name,
+    });
     console.log(category);
 
     const res = await category.save()
-    if(res) console.log("create successful");
+    //   { id: category.id },
+    //   { category_name: category.category_name }
+    // );
+    if (res) console.log("create successful");
     else console.log("update successful");
-    return NextResponse.json({ message: "GET success" });
+    return NextResponse.json({
+      message: "GET success",
+      data: res.modifiedCount,
+    });
   } catch (err) {
     return NextResponse.json({ message: "GET error: " + err, data: null });
   }
 }
-
