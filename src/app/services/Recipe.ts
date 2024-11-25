@@ -10,22 +10,32 @@ const getAllRecipes = async () => {
   return res.data.data;
 };
 
-const getFavoriteRecipes = async (favorite:boolean) => {
-  const res = await axios.get(`/api/Recipe/${favorite}`, {
-    headers: {
-      "Cache-Control": "no-cache",
-    },
-  });
-  return res.data.data;
+const getFavoriteRecipes = async (favorite: boolean) => {
+  try {
+    const res = await axios.get(`/api/Recipe/favorite/${favorite}`, {
+      headers: {
+        "Cache-Control": "no-cache",
+      },
+    });
+    return res.data.data;
+  } catch (error) {
+    console.error("Error fetching favorite recipes:", error);
+    throw error;
+  }
 };
 
 const getRecipe = async (id: number) => {
-  const res = await axios.get(`/api/Recipe/${id}`, {
-    headers: {
-      "Cache-Control": "no-cache",
-    },
-  });
-  return res.data.data;
+  try {
+    const res = await axios.get(`/api/Recipe/${id}`, {
+      headers: {
+        "Cache-Control": "no-cache",
+      },
+    });
+    return res.data.data;
+  } catch (error) {
+    console.error("Error fetching recipes:", error);
+    throw error;
+  }
 };
 
 const createRecipe = async (recipe: IRecipe) => {
@@ -42,7 +52,7 @@ const createRecipe = async (recipe: IRecipe) => {
   );
   return res.data.data;
 };
-const updateReipe = async (recipe: IRecipe) => {
+const updateRecipe = async (recipe: IRecipe) => {
   const res = await axios.put(
     `/api/Recipe`,
     {
@@ -65,11 +75,11 @@ const deleteRecipe = async (id: number) => {
   return res.data.data;
 };
 
-export  {
+export {
   getAllRecipes,
   getFavoriteRecipes,
   getRecipe,
   createRecipe,
-  updateReipe,
+  updateRecipe,
   deleteRecipe,
 };

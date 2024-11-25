@@ -12,6 +12,6 @@ const RecipeSchema: Schema<IRecipes> = new Schema<IRecipes>({
 });
 
 const Recipe: Model<IRecipes> =
-  mongoose.models.Category || mongoose.model<IRecipes>("Recipe", RecipeSchema);
+  mongoose.models.Recipe || mongoose.model<IRecipes>("Recipe", RecipeSchema);
 
 export default Recipe;
