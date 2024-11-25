@@ -2,7 +2,16 @@ import axios from "axios";
 import IRecipe from "../types/elements/Recipe";
 
 const getAllRecipes = async () => {
-  const res = await axios.get("api/Recipe", {
+  const res = await axios.get("/api/Recipe", {
+    headers: {
+      "Cache-Control": "no-cache",
+    },
+  });
+  return res.data.data;
+};
+
+const getFavoriteRecipes = async () => {
+  const res = await axios.get("/api/Recipe", {
     headers: {
       "Cache-Control": "no-cache",
     },
@@ -11,7 +20,7 @@ const getAllRecipes = async () => {
 };
 
 const getRecipe = async (id: number) => {
-  const res = await axios.get(`api/Reccipe/${id}`, {
+  const res = await axios.get(`/api/Reccipe/${id}`, {
     headers: {
       "Cache-Control": "no-cache",
     },
@@ -21,7 +30,7 @@ const getRecipe = async (id: number) => {
 
 const createRecipe = async (recipe: IRecipe) => {
   const res = await axios.post(
-    `api/Recipe`,
+    `/api/Recipe`,
     {
       new_recipe: recipe,
     },
@@ -35,7 +44,7 @@ const createRecipe = async (recipe: IRecipe) => {
 };
 const updateReipe = async (recipe: IRecipe) => {
   const res = await axios.put(
-    `api/Recipe`,
+    `/api/Recipe`,
     {
       updated_recipe: recipe,
     },
@@ -48,7 +57,7 @@ const updateReipe = async (recipe: IRecipe) => {
   return res.data.data;
 };
 const deleteRecipe = async (id: number) => {
-  const res = await axios.delete(`api/Recipe/${id}`, {
+  const res = await axios.delete(`/api/Recipe/${id}`, {
     headers: {
       "Cache-Control": "no-cache",
     },
@@ -58,6 +67,7 @@ const deleteRecipe = async (id: number) => {
 
 export  {
   getAllRecipes,
+  getFavoriteRecipes,
   getRecipe,
   createRecipe,
   updateReipe,
