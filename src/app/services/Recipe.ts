@@ -10,8 +10,8 @@ const getAllRecipes = async () => {
   return res.data.data;
 };
 
-const getFavoriteRecipes = async () => {
-  const res = await axios.get("/api/Recipe", {
+const getFavoriteRecipes = async (favorite:boolean) => {
+  const res = await axios.get(`/api/Recipe/${favorite}`, {
     headers: {
       "Cache-Control": "no-cache",
     },
@@ -20,7 +20,7 @@ const getFavoriteRecipes = async () => {
 };
 
 const getRecipe = async (id: number) => {
-  const res = await axios.get(`/api/Reccipe/${id}`, {
+  const res = await axios.get(`/api/Recipe/${id}`, {
     headers: {
       "Cache-Control": "no-cache",
     },
