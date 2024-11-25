@@ -5,5 +5,6 @@ export default interface Recipe extends Document {
   img: string;
   recipe_name: string;
   ingredients: Array<string>;
+  favorite:boolean,
   description: string;
 }

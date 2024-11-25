@@ -1,62 +1,62 @@
 import connect from "@/app/lib/db/mongodb";
 import Recipe from "@/app/lib/models/Recipe";
-import IRecipe from "@/app/types/models/RecipeType";
 import { NextRequest, NextResponse } from "next/server";
 
+// GET: קריאת כל הקטגוריות
 export async function GET() {
   try {
     await connect();
     const data = await Recipe.find();
-    return NextResponse.json({ message: "GET success", data: data });
+
+    if (!data || data.length === 0) {
+      return NextResponse.json({ message: "No recipes found", data: [] });
+    }
+
+    return NextResponse.json({ message: "GET success", data });
   } catch (err) {
-    return NextResponse.json({ message: "GET error: " + err, data: null });
+    return NextResponse.json({ message: `GET error: ${err}`, data: null });
   }
 }
 
+// POST: יצירת קטגוריה חדשה
 export async function POST(req: NextRequest) {
   const data = await req.json();
 
+  if (!data.new_recipe || !data.new_recipe.id || !data.new_recipe.recipe_name) {
+    return NextResponse.json({ message: "Invalid data", data: null });
+  }
+
   try {
     await connect();
-    const recipe: IRecipe = new Recipe({
-      id: data.new_recipe.id,
-      category_id: data.new_recipe.category_id,
-      img: data.new_recipe.img,
-      recipe_name: data.new_recipe.recipe_name,
-      ingredients: data.new_recipe.ingredients,
-      description: data.new_recipe.description,
-    });
-    console.log(recipe);
-
+    const recipe = new Recipe(data.new_recipe);
     const res = await recipe.save();
-    if (res) console.log("create successful");
-    else console.log("already exists");
-
-    return NextResponse.json({ message: "GET success" });
+    return NextResponse.json({ message: "POST success", data: res });
   } catch (err) {
-    return NextResponse.json({ message: "GET error: " + err, data: null });
+    return NextResponse.json({ message: `POST error: ${err}`, data: null });
   }
 }
 
+// PUT: עדכון קטגוריה קיימת
 export async function PUT(req: NextRequest) {
   const data = await req.json();
+
+  if (!data.updated_recipe || !data.updated_recipe.id || !data.updated_recipe.recipe_name) {
+    return NextResponse.json({ message: "Invalid data", data: null });
+  }
+
   try {
     await connect();
-    const recipe: IRecipe = new Recipe({
-      id: data.new_recipe.id,
-      category_id: data.new_recipe.category_id,
-      img: data.new_recipe.img,
-      recipe_name: data.new_recipe.recipe_name,
-      ingredients: data.new_recipe.ingredients,
-      description: data.new_recipe.description,
-    });
-    console.log(recipe);
+    const res = await Recipe.updateOne(
+      { id: data.updated_recipe.id },
+      { recipe_name: data.updated_recipe.recipe_name }
+    );
 
-    const res = await recipe.save();
-    if (res) console.log("create successful");
-    else console.log("update successful");
-    return NextResponse.json({ message: "GET success" });
+    if (res.modifiedCount > 0) {
+      return NextResponse.json({ message: "PUT success", data: res });
+    } else {
+      return NextResponse.json({ message: "No changes made", data: res });
+    }
   } catch (err) {
-    return NextResponse.json({ message: "GET error: " + err, data: null });
+    return NextResponse.json({ message: `PUT error: ${err}`, data: null });
   }
 }
