@@ -51,8 +51,8 @@ export async function PUT(req: NextRequest) {
     if (res) console.log("create successful");
     else console.log("update successful");
     return NextResponse.json({
-      message: "GET success",
-      data: res.modifiedCount,
+      message: "PUT success",
+      data: res,
     });
   } catch (err) {
     return NextResponse.json({ message: "GET error: " + err, data: null });

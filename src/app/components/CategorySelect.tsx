@@ -1,16 +1,27 @@
 "use client";
 import React from "react";
+import { getAllCategories } from "../services/Category";
+import { useQuery } from "@tanstack/react-query";
+import ICategory from "../types/models/CategoryType";
 
 const CategorySelect = () => {
+  const { isLoading, error, data } = useQuery({
+    queryKey: [""],
+    queryFn: async () =>
+      await getAllCategories(),
+  });
   return (
     <select className="input rectangle flex" defaultValue="">
-      <option value="" disabled>
+      
+    {(isLoading || error) && (<option value="" disabled>
         Choose category
-      </option>
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
+      </option>)}
+      {
+    (data) && (
+      data.map((item:ICategory, index:number) =>
+        <option key={index} value={item.id}>{item.category_name}</option>
+      )
+    )}
     </select>
   );
 };

@@ -2,16 +2,18 @@ import axios from "axios";
 import ICategory from "../types/elements/Category";
 
 const getAllCategories = async () => {
-  const res = await axios.get("api/Category", {
+  const res = await axios.get("/api/Category", {
     headers: {
       "Cache-Control": "no-cache",
     },
   });
-  return res.data.data;
+  console.log(res.data.data);
+  
+  return res.data.data
 };
 
 const getCategory = async (id: number) => {
-  const res = await axios.get(`api/Category/${id}`, {
+  const res = await axios.get(`/api/Category/${id}`, {
     headers: {
       "Cache-Control": "no-cache",
     },
@@ -21,7 +23,7 @@ const getCategory = async (id: number) => {
 
 const createCategory = async (category: ICategory) => {
   const res = await axios.post(
-    `api/Category`,
+    `/api/Category`,
     {
       new_category: category,
     },
@@ -35,7 +37,7 @@ const createCategory = async (category: ICategory) => {
 };
 const updateCategory = async (category: ICategory) => {
   const res = await axios.put(
-    `api/Category`,
+    `/api/Category`,
     {
       updated_category: category,
     },
@@ -48,7 +50,7 @@ const updateCategory = async (category: ICategory) => {
   return res.data.message;
 };
 const deleteCategory = async (id: number) => {
-  const res = await axios.delete(`api/Category/${id}`, {
+  const res = await axios.delete(`/api/Category/${id}`, {
     headers: {
       "Cache-Control": "no-cache",
     },
