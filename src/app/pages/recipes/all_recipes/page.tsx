@@ -8,6 +8,7 @@ const recipes = [
     img: "/img/cake.jpg",
     recipe_name: "Cake",
     ingredients: ["Flour", "Sugar", "Eggs"],
+    favorite:true,
     description: "A delicious cake",
   },
   {
@@ -16,6 +17,7 @@ const recipes = [
     img: "/img/salad.jpg",
     recipe_name: "Pasta",
     ingredients: ["Pasta", "Tomato Sauce", "Cheese"],
+    favorite:false,
     description: "Tasty pasta",
   },
   {
@@ -24,6 +26,7 @@ const recipes = [
     img: "/img/salad1.jpg",
     recipe_name: "Salad",
     ingredients: ["Lettuce", "Tomatoes", "Cucumber"],
+    favorite:false,
     description: "Healthy salad",
   },
 ];
