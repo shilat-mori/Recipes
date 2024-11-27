@@ -1,10 +1,6 @@
-import RecipesList from '@/app/components/RecipesList'
-import React from 'react'
+"use client";
+const page =  () => {
+    
+};
 
-const page = () => {
-  return (
-    <RecipesList/>
-  )
-}
-
-export default page
+export default page;

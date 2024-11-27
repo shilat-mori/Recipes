@@ -2,14 +2,18 @@ import axios from "axios";
 import IRecipe from "../types/elements/Recipe";
 
 const getAllRecipes = async () => {
-  const res = await axios.get("/api/Recipe", {
-    headers: {
-      "Cache-Control": "no-cache",
-    },
-  });
-  return res.data.data;
+  try {
+    const res = await axios.get("/api/Recipe", {
+      headers: {
+        "Cache-Control": "no-cache",
+      },
+    });
+    return res.data.data;
+  } catch (error) {
+    console.error("Error fetching all recipes:", error);
+    throw error;
+  }
 };
-
 const getFavoriteRecipes = async (favorite: boolean) => {
   try {
     const res = await axios.get(`/api/Recipe/favorite/${favorite}`, {

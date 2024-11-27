@@ -1,30 +1,25 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getFavoriteRecipes, getAllRecipes } from "../services/Recipe";
+import { getFavoriteRecipes } from "../services/Recipe";
 import IRecipe from "../types/models/RecipeType";
 import RecipeCard from "./RecipeCard";
 
-const RecipesList = ({
+const FavoriteRecipe = ({
   selectedCategory,
   searchTerm,
 }: {
   selectedCategory: number | null;
   searchTerm: string;
 }) => {
-  const pathname = usePathname();
-  const isFavoritesPage = pathname === "/favorite";
-
   const [recipes, setRecipes] = useState<IRecipe[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const recipesPerPage = 8;
 
   const { isLoading, error, data } = useQuery({
-    queryKey: ["recipes", selectedCategory],
-    queryFn: async () =>
-      isFavoritesPage ? await getFavoriteRecipes(true) : await getAllRecipes(),
+    queryKey: ["favoriteRecipes", selectedCategory],
+    queryFn: async () => await getFavoriteRecipes(true),
   });
 
   useEffect(() => {
@@ -45,7 +40,7 @@ const RecipesList = ({
 
       setRecipes(filteredRecipes);
     }
-  }, [selectedCategory, data, searchTerm]);
+  }, [data, selectedCategory, searchTerm]);
 
   const totalPages = Math.ceil(recipes.length / recipesPerPage);
   const paginatedRecipes = recipes.slice(
@@ -65,9 +60,9 @@ const RecipesList = ({
     <div>
       <div className="grid grid-cols-4 gap-6">
         {isLoading ? (
-          <p>loading...</p>
+          <p>Loading...</p>
         ) : error ? (
-          <p>Error fetching recipes</p>
+          <p>Error fetching favorite recipes</p>
         ) : (
           paginatedRecipes.map((recipe: IRecipe, index: number) => (
             <RecipeCard key={index} recipe={recipe} />
@@ -75,21 +70,21 @@ const RecipesList = ({
         )}
       </div>
 
-      <div className="pagination-controls">
+      <div className="pagination-controls flex justify-center items-center gap-4 mt-4">
         <button
           onClick={handlePreviousPage}
           disabled={currentPage === 1}
-          className="pagination-button"
+          className="pagination-button bg-blue-500 text-white px-4 py-2 rounded disabled:opacity-50"
         >
           Previous
         </button>
-        <span className="page-indicator">
+        <span className="page-indicator text-gray-700 font-semibold">
           Page {currentPage} of {totalPages}
         </span>
         <button
           onClick={handleNextPage}
           disabled={currentPage === totalPages}
-          className="pagination-button"
+          className="pagination-button bg-blue-500 text-white px-4 py-2 rounded disabled:opacity-50"
         >
           Next
         </button>
@@ -98,4 +93,4 @@ const RecipesList = ({
   );
 };
 
-export default RecipesList;
+export default FavoriteRecipe;

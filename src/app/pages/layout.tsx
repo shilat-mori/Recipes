@@ -6,9 +6,7 @@ export default function PagesLayout({
 }>) {
   return (
     <div>
-      <header>header</header>
       {children}
-      <footer>footer</footer>
     </div>
   );
 }

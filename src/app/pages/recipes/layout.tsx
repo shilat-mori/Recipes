@@ -10,7 +10,7 @@ export default function PagesLayout({
   return (
     <div>
       <QueryClientProvider client={queryClient}>
-        <Header />
+        <Header  />
         {children}
       </QueryClientProvider>
     </div>
